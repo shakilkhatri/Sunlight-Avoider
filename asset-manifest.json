@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/shakilkhatri/Sunlight-Avoider/static/css/main.67a1c7fb.css",
+    "main.js": "/shakilkhatri/Sunlight-Avoider/static/js/main.cdc2c17e.js",
+    "static/media/mapImage.PNG": "/shakilkhatri/Sunlight-Avoider/static/media/mapImage.00cebc7acd238e5ae3b4.PNG",
+    "index.html": "/shakilkhatri/Sunlight-Avoider/index.html",
+    "main.67a1c7fb.css.map": "/shakilkhatri/Sunlight-Avoider/static/css/main.67a1c7fb.css.map",
+    "main.cdc2c17e.js.map": "/shakilkhatri/Sunlight-Avoider/static/js/main.cdc2c17e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.67a1c7fb.css",
+    "static/js/main.cdc2c17e.js"
+  ]
+}
