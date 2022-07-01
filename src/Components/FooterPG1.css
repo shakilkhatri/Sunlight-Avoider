@@ -1,0 +1,20 @@
+.Footer {
+  /* position: absolute;
+  bottom: 0; */
+  width: 100%;
+  background-color: lightgray;
+  height: 50px;
+}
+
+.footerText {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 500) {
+  .Footer {
+    position: unset;
+    bottom: unset;
+  }
+}

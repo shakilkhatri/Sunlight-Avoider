@@ -1,0 +1,30 @@
+.location-search-input {
+  height: 2rem;
+  font-size: 1.2rem;
+  border: 2px solid gray;
+  border-radius: 20px;
+  padding-left: 10px;
+}
+
+.autocomplete-dropdown-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: unset;
+  align-content: unset;
+  position: absolute;
+  width: 300px;
+  z-index: 1;
+}
+
+.autocomplete-dropdown-container span {
+  /* background-color: antiquewhite; */
+  display: block;
+  text-align: left;
+  border: 1px solid gray;
+  align-self: flex-start;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 3px;
+}

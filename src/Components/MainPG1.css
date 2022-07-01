@@ -1,0 +1,85 @@
+.MainPG1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  background-color: black;
+  min-height: calc(100vh - 140px);
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 300px;
+}
+
+Form > input {
+  height: 2rem;
+  border: 2px solid gray;
+  border-radius: 20px;
+  padding-left: 10px;
+}
+
+.Bus {
+  height: 150px;
+  width: 75px;
+  background-color: rgb(255, 21, 0);
+  border: 2px solid black;
+  box-shadow: 0 0 20px gray;
+}
+
+.Map {
+  height: 300px;
+  width: 300px;
+  margin: 30px;
+  background-color: rgb(212, 255, 193);
+  border: 2px solid black;
+  box-shadow: 0 0 20px gray;
+  border-radius: 150px;
+  background-image: url("../Images/mapImage.PNG");
+}
+
+.button {
+  display: inline-block;
+  margin-top: 30px;
+  height: 75px;
+  width: 250px;
+  border-radius: 20px;
+  transition: 0.2s;
+  font-size: 25px;
+  font-weight: bold;
+  border: 2px solid black;
+  color: white;
+  position: relative;
+  background-color: rgb(25, 136, 241);
+}
+
+.button:active {
+  /* top: 0.1em; */
+  zoom: 0.9;
+}
+.button:hover {
+  background-color: rgb(45, 151, 250);
+}
+
+.busbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 400px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 20px gray;
+}
+
+.sunImage {
+  height: 50px;
+  position: inherit;
+  left: 30px;
+  border-radius: 25px;
+  z-index: 5;
+}
