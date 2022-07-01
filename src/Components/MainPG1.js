@@ -8,6 +8,7 @@ const MainPG1 = () => {
   const [destination, setDestination] = useState("{}");
   const [shadowX, setShadowX] = useState(0);
   const [shadowY, setShadowY] = useState(0);
+  const [showResult, setShowResult] = useState(false);
 
   let originLat = JSON.parse(origin).lat;
   let originLng = JSON.parse(origin).lng;
@@ -34,7 +35,7 @@ const MainPG1 = () => {
   let sunlightDir;
   // console.log(curHr);
 
-  if (curHr < 12) {
+  if (curHr < 12 && curHr > 6) {
     if (angle <= 45 || angle >= 315) {
       sunlightDir = "Front";
     }
@@ -66,8 +67,8 @@ const MainPG1 = () => {
   if (curHr >= 12 && curHr <= 14) {
     sunlightDir = "Top";
   }
-  if (curHr >= 19) {
-    sunlightDir = "Top";
+  if (curHr >= 19 || curHr < 6) {
+    sunlightDir = "Nowhere";
   }
 
   let busShadowStyle = {
@@ -75,6 +76,7 @@ const MainPG1 = () => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line
     busShadowStyle = {
       boxShadow: `${shadowX}px ${shadowY}px 5px #F4AAB9`,
     };
@@ -89,6 +91,16 @@ const MainPG1 = () => {
     console.log("Latitude difference :" + LatDiff);
     console.log("Longitude difference :" + LngDiff);
     console.log("The path angle w.r.t. the East is :" + angle);
+
+    setShowResult(true);
+
+    setTimeout(() => {
+      window.scroll({
+        top: 1200,
+        left: 0,
+        behavior: "smooth",
+      });
+    }, 200);
 
     if (sunlightDir === "Front") {
       setShadowX(0);
@@ -112,35 +124,58 @@ const MainPG1 = () => {
   };
 
   return (
-    <div className="MainPG1">
-      <form className="Form" onSubmit={handleSubmit}>
-        <LocationSearchInput placeholder={"Origin"} setOrigin={setOrigin} />
-        <LocationSearchInput
-          placeholder={"Destination"}
-          setDestination={setDestination}
-        />
-        <button type="submit" className="button">
-          DETECT!
-        </button>
-        <span style={{ color: "gray" }}>{"Origin Coordinates: " + origin}</span>
-        <span style={{ color: "gray" }}>
-          {"Destination Coordinates: " + destination}
-        </span>
-      </form>
+    <>
+      <div
+        style={{ color: "white", backgroundColor: "black", padding: "10px" }}
+      >
+        <p>Welcome to Sunlight detector!</p>
+        <p>
+          Use this web-application before chosing a seat on public transport to
+          avoid sitting directly into sunlight !
+        </p>
+      </div>
+      <div className="MainPG1">
+        <form className="Form" onSubmit={handleSubmit}>
+          <LocationSearchInput
+            placeholder={"Origin"}
+            setOrigin={setOrigin}
+            key={"Origin"}
+          />
+          <LocationSearchInput
+            placeholder={"Destination"}
+            setDestination={setDestination}
+            key={"Destination"}
+          />
+          <button type="submit" className="button">
+            DETECT!
+          </button>
+          <span style={{ color: "gray" }}>
+            {"Origin Coordinates: " + origin}
+          </span>
+          <span style={{ color: "gray" }}>
+            {"Destination Coordinates: " + destination}
+          </span>
+        </form>
 
-      <span className="Map"></span>
+        {/* <span className="Map"></span> */}
 
-      <span className="busbox">
-        <span className="Bus" style={busShadowStyle}>
-          Vehicle
+        <span className="busbox">
+          <span className="Bus" style={busShadowStyle}>
+            Vehicle
+          </span>
+          {/* <img
+            src={require("../Images/sun.jpg")}
+            alt="sun"
+            className="sunImage"
+          /> */}
         </span>
-        <img
-          src={require("../Images/sun.jpg")}
-          alt="sun"
-          className="sunImage"
-        />
-      </span>
-    </div>
+      </div>
+      {showResult ? (
+        <h1> {`Sunlight is coming from: ${sunlightDir}`}</h1>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

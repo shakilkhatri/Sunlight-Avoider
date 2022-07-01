@@ -5,6 +5,9 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import "./GoogleAutocomplete.css";
 
+let selectedOrigin = "";
+let selectedDestination = "";
+
 class LocationSearchInput extends React.Component {
   constructor(props) {
     super(props);
@@ -13,14 +16,30 @@ class LocationSearchInput extends React.Component {
 
   handleChange = (address) => {
     this.setState({ address });
+
+    if (this.props.placeholder === "Origin") {
+      selectedOrigin = address;
+    } else {
+      selectedDestination = address;
+    }
   };
 
   handleSelect = (address) => {
     geocodeByAddress(address)
-      .then((results) => getLatLng(results[0]))
+      .then((results) => {
+        if (this.props.placeholder === "Origin") {
+          selectedOrigin = results[0].formatted_address;
+        }
+        if (this.props.placeholder === "Destination") {
+          selectedDestination = results[0].formatted_address;
+        }
+
+        console.log(results[0].formatted_address);
+        return getLatLng(results[0]);
+      })
       .then((latLng) => {
         console.log("Success", latLng);
-        if (this.props.placeholder == "Origin")
+        if (this.props.placeholder === "Origin")
           this.props.setOrigin(JSON.stringify(latLng));
         else {
           this.props.setDestination(JSON.stringify(latLng));
@@ -43,6 +62,11 @@ class LocationSearchInput extends React.Component {
                 placeholder: `Search ${this.props.placeholder}...`,
                 className: "location-search-input",
               })}
+              value={
+                this.props.placeholder === "Origin"
+                  ? selectedOrigin
+                  : selectedDestination
+              }
             />
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
