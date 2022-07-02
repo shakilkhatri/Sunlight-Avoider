@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/shakilkhatri/Sunlight-Avoider/static/css/main.67a1c7fb.css",
-    "main.js": "/shakilkhatri/Sunlight-Avoider/static/js/main.cdc2c17e.js",
-    "static/media/mapImage.PNG": "/shakilkhatri/Sunlight-Avoider/static/media/mapImage.00cebc7acd238e5ae3b4.PNG",
-    "index.html": "/shakilkhatri/Sunlight-Avoider/index.html",
-    "main.67a1c7fb.css.map": "/shakilkhatri/Sunlight-Avoider/static/css/main.67a1c7fb.css.map",
-    "main.cdc2c17e.js.map": "/shakilkhatri/Sunlight-Avoider/static/js/main.cdc2c17e.js.map"
+    "main.css": "/Sunlight-Avoider/static/css/main.ae982a13.css",
+    "main.js": "/Sunlight-Avoider/static/js/main.cdc2c17e.js",
+    "static/media/mapImage.PNG": "/Sunlight-Avoider/static/media/mapImage.00cebc7acd238e5ae3b4.PNG",
+    "index.html": "/Sunlight-Avoider/index.html",
+    "main.ae982a13.css.map": "/Sunlight-Avoider/static/css/main.ae982a13.css.map",
+    "main.cdc2c17e.js.map": "/Sunlight-Avoider/static/js/main.cdc2c17e.js.map"
   },
   "entrypoints": [
-    "static/css/main.67a1c7fb.css",
+    "static/css/main.ae982a13.css",
     "static/js/main.cdc2c17e.js"
   ]
 }
