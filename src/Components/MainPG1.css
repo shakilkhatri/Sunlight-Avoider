@@ -8,6 +8,12 @@
   min-height: calc(100vh - 265px);
 }
 
+.info {
+  color: white;
+  background-color: black;
+  padding: 10px;
+  text-align: center;
+}
 .Form {
   display: flex;
   flex-direction: column;
@@ -24,11 +30,17 @@ Form > input {
 }
 
 .Bus {
-  height: 150px;
-  width: 75px;
+  display: inline-block;
+  position: relative;
+  left: 28px;
+  top: 70px;
+  height: 100px;
+  width: 50px;
+  /* zoom: 0.5; */
   background-color: rgb(255, 21, 0);
   border: 2px solid black;
   box-shadow: 0 0 20px gray;
+  text-align: center;
 }
 
 .Map {
@@ -48,7 +60,7 @@ Form > input {
   height: 75px;
   width: 250px;
   border-radius: 20px;
-  transition: 0.2s;
+  transition: 0.5s;
   font-size: 25px;
   font-weight: bold;
   border: 2px solid black;
@@ -66,22 +78,57 @@ Form > input {
 }
 
 .busbox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* display: unset;
+  flex-direction: unset; */
+  /* justify-content: center;
+  align-items: center; */
+  text-align: unset;
   width: 300px;
   height: 300px;
   background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 0 20px gray;
+  border-radius: 150px;
+  box-shadow: 0 0 10px lightgray;
+  background-image: url("../Images/road2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .sunImage {
   height: 50px;
-  position: inherit;
-  left: 30px;
+  position: relative;
+  /* top: 50px; */
   border-radius: 25px;
   z-index: 5;
+  border: 1px solid yellow;
+}
+
+.sunBox {
+  /* transform: rotate(90deg); */
+  display: inline-block;
+  /* margin: auto; */
+  position: relative;
+  right: 25px;
+  top: 0;
+  /* border: 1px solid black; */
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent calc(50% - 0.2px),
+    rgb(255, 234, 1) calc(50% - 0.1px),
+    transparent calc(50% + 0.2px),
+    transparent 100%
+  );
+}
+
+.East {
+  position: relative;
+  top: 0;
+}
+.West {
+  position: relative;
+  bottom: 0;
 }
 
 @media (max-width: 400) {

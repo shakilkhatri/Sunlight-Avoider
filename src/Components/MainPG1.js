@@ -9,6 +9,7 @@ const MainPG1 = () => {
   const [shadowX, setShadowX] = useState(0);
   const [shadowY, setShadowY] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const [ang, setAng] = useState(0);
 
   let originLat = JSON.parse(origin).lat;
   let originLng = JSON.parse(origin).lng;
@@ -31,11 +32,30 @@ const MainPG1 = () => {
   }
 
   var today = new Date();
-  var curHr = today.getHours();
-  let sunlightDir;
+  // var curHr = today.getHours();
+  var curHr = 18;
+  var sunlightDir = "";
   // console.log(curHr);
 
-  if (curHr < 12 && curHr > 6) {
+  let busShadowStyle = {
+    boxShadow: `${shadowX}px ${shadowY}px 10px #000`,
+  };
+
+  let sunStyle = { transform: `rotate(${ang}deg)` };
+
+  let x, y;
+  let shadowLength;
+  // angle = 270;
+  let angleRad = (angle * 3.14) / 180;
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    // busShadowStyle = {
+    //   boxShadow: `${shadowX}px ${shadowY}px 5px #F4AAB9`,
+    // };
+  }, [shadowX, shadowY, sunlightDir]);
+
+  if (curHr >= 6 && curHr < 12) {
     if (angle <= 45 || angle >= 315) {
       sunlightDir = "Front";
     }
@@ -71,63 +91,106 @@ const MainPG1 = () => {
     sunlightDir = "Nowhere";
   }
 
-  let busShadowStyle = {
-    boxShadow: `${shadowX}px ${shadowY}px 5px #F4AAB9`,
-  };
-
-  useEffect(() => {
-    // eslint-disable-next-line
-    busShadowStyle = {
-      boxShadow: `${shadowX}px ${shadowY}px 5px #F4AAB9`,
-    };
-  }, [shadowX, shadowY]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(originLat);
     // console.log(originLng);
     // console.log(destinationLat);
     // console.log(destinationLng);
+
     console.log("Latitude difference :" + LatDiff);
     console.log("Longitude difference :" + LngDiff);
     console.log("The path angle w.r.t. the East is :" + angle);
 
-    setShowResult(true);
-
-    setTimeout(() => {
-      window.scroll({
-        top: 1200,
-        left: 0,
-        behavior: "smooth",
-      });
-    }, 200);
-
-    if (sunlightDir === "Front") {
-      setShadowX(0);
-      setShadowY(50);
-    } else if (sunlightDir === "Back") {
-      setShadowX(0);
-      setShadowY(-50);
-    } else if (sunlightDir === "Left") {
-      setShadowX(50);
-      setShadowY(0);
-    } else if (sunlightDir === "Right") {
-      setShadowX(-50);
-      setShadowY(0);
-    } else if (sunlightDir === "Top") {
-      setShadowX(0);
-      setShadowY(0);
+    if (isNaN(LatDiff) || isNaN(LngDiff)) {
+      setShowResult(false);
+      alert("Please select Origin and Destination.");
+    } else if (LatDiff !== 0 || LngDiff !== 0) {
+      setShowResult(true);
+      setTimeout(() => {
+        window.scroll({
+          top: 1200,
+          left: 0,
+          behavior: "smooth",
+        });
+      }, 200);
+    } else {
+      setShowResult(false);
+      alert("Origin and Destination cannot be the same.");
     }
-    busShadowStyle = {
-      boxShadow: `${shadowX}px ${shadowY}px 5px #F4AAB9`,
-    };
+    console.log(sunlightDir);
+
+    // if (sunlightDir === "Front") {
+    //   setShadowX(0);
+    //   setShadowY(50);
+    // } else if (sunlightDir === "Back") {
+    //   setShadowX(0);
+    //   setShadowY(-50);
+    // } else if (sunlightDir === "Left") {
+    //   setShadowX(50);
+    //   setShadowY(0);
+    // } else if (sunlightDir === "Right") {
+    //   setShadowX(-50);
+    //   setShadowY(0);
+    // } else if (sunlightDir === "Top") {
+    //   setShadowX(0);
+    //   setShadowY(0);
+    // }
+
+    if (curHr >= 6 && curHr <= 12) {
+      shadowLength = 30 - (curHr - 6) * 5;
+    } else if (curHr > 12 && curHr <= 24) {
+      shadowLength = (curHr - 12) * 5;
+    } else {
+      shadowLength = 0;
+    }
+
+    if (curHr <= 12) {
+      if (angle >= 0 && angle <= 90) {
+        x = -shadowLength * Math.sin(angleRad);
+        y = shadowLength * Math.cos(angleRad);
+      } else if (angle > 90 && angle <= 180) {
+        x = -shadowLength * Math.cos(angleRad - Math.PI / 2);
+        y = -shadowLength * Math.sin(angleRad - Math.PI / 2);
+      } else if (angle > 180 && angle < 270) {
+        x = shadowLength * Math.cos(angleRad - Math.PI);
+        y = -shadowLength * Math.cos(angleRad - Math.PI);
+      } else if (angle >= 270 && angle < 360) {
+        x = shadowLength * Math.cos(angleRad - Math.PI * 1.5);
+        y = shadowLength * Math.sin(angleRad - Math.PI * 1.5);
+      }
+    }
+    if (curHr > 12) {
+      if (angle >= 0 && angle <= 90) {
+        x = +shadowLength * Math.sin(angleRad);
+        y = -shadowLength * Math.cos(angleRad);
+      } else if (angle > 90 && angle <= 180) {
+        x = shadowLength * Math.cos(angleRad - Math.PI / 2);
+        y = shadowLength * Math.sin(angleRad - Math.PI / 2);
+      } else if (angle > 180 && angle < 270) {
+        x = -shadowLength * Math.cos(angleRad - Math.PI);
+        y = +shadowLength * Math.cos(angleRad - Math.PI);
+      } else if (angle >= 270 && angle < 360) {
+        x = -shadowLength * Math.cos(angleRad - Math.PI * 1.5);
+        y = -shadowLength * Math.sin(angleRad - Math.PI * 1.5);
+      }
+    }
+    setAng(angle);
+    setShadowX(x);
+    setShadowY(y);
+
+    // console.log("angle", angle, angleRad);
+    // console.log(`${shadowX}px ${shadowY}px 5px #F4AAB9`);
+
+    // busShadowStyle = {
+    //   boxShadow: `${shadowX}px ${shadowY}px 5px #F4AAB9`,
+    // };
+    // sunStyle = { transform: `rotate(${angle}deg)` };
   };
 
   return (
     <>
-      <div
-        style={{ color: "white", backgroundColor: "black", padding: "10px" }}
-      >
+      <div className="info">
         <p>Welcome to Sunlight detector!</p>
         <p>
           Use this web-application before chosing a seat on public transport to
@@ -140,11 +203,13 @@ const MainPG1 = () => {
             placeholder={"Origin"}
             setOrigin={setOrigin}
             key={"Origin"}
+            showResult={showResult}
           />
           <LocationSearchInput
             placeholder={"Destination"}
             setDestination={setDestination}
             key={"Destination"}
+            showResult={showResult}
           />
           <button type="submit" className="button">
             DETECT!
@@ -163,11 +228,21 @@ const MainPG1 = () => {
           <span className="Bus" style={busShadowStyle}>
             Vehicle
           </span>
-          {/* <img
-            src={require("../Images/sun.jpg")}
-            alt="sun"
-            className="sunImage"
-          /> */}
+
+          <span className="sunBox" style={sunStyle}>
+            {/* <p className="East">W</p> */}
+
+            <img
+              src={require("../Images/sun.jpg")}
+              alt="sun"
+              className="sunImage"
+              style={{
+                top: `${curHr >= 6 && curHr <= 18 ? (curHr - 6) * 20 : 300}px`,
+              }}
+            />
+
+            {/* <p className="West">W</p> */}
+          </span>
         </span>
       </div>
       {showResult ? (

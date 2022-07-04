@@ -15,6 +15,7 @@ class LocationSearchInput extends React.Component {
   }
 
   handleChange = (address) => {
+    this.showResult = false;
     this.setState({ address });
 
     if (this.props.placeholder === "Origin") {
