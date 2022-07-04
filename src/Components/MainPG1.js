@@ -10,6 +10,7 @@ const MainPG1 = () => {
   const [shadowY, setShadowY] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [ang, setAng] = useState(0);
+  const [opacity, setOpacity] = useState(0.2);
 
   let originLat = JSON.parse(origin).lat;
   let originLng = JSON.parse(origin).lng;
@@ -139,10 +140,13 @@ const MainPG1 = () => {
 
     if (curHr >= 6 && curHr <= 12) {
       shadowLength = 30 - (curHr - 6) * 5;
-    } else if (curHr > 12 && curHr <= 24) {
+      setOpacity(1);
+    } else if (curHr > 12 && curHr <= 18) {
       shadowLength = (curHr - 12) * 5;
+      setOpacity(1);
     } else {
       shadowLength = 0;
+      setOpacity(0.2);
     }
 
     if (curHr > 6 && curHr <= 12) {
@@ -217,10 +221,10 @@ const MainPG1 = () => {
           <button type="submit" className="button">
             DETECT!
           </button>
-          <span style={{ color: "gray" }}>
+          <span className="coordinates" style={{ color: "gray" }}>
             {"Origin Coordinates: " + origin}
           </span>
-          <span style={{ color: "gray" }}>
+          <span className="coordinates" style={{ color: "gray" }}>
             {"Destination Coordinates: " + destination}
           </span>
         </form>
@@ -246,6 +250,7 @@ const MainPG1 = () => {
               className="sunImage"
               style={{
                 top: `${curHr >= 6 && curHr <= 18 ? (curHr - 6) * 20 : 300}px`,
+                opacity: `${opacity}`,
               }}
             />
 

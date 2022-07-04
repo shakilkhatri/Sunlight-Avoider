@@ -19,7 +19,8 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  min-height: 300px;
+  min-height: 400px;
+  width: 350px;
 }
 
 Form > input {
@@ -101,10 +102,14 @@ Form > input {
   background-position: center;
   background-size: contain;
   margin: 30px 0;
+  /* border: solid 50px cyan;
+  position: relative;
+  z-index: 20; */
 }
 
 .sunImage {
   height: 50px;
+  width: 50px;
   position: relative;
   /* top: 50px; */
   border-radius: 25px;
@@ -113,6 +118,8 @@ Form > input {
 }
 
 .sunBox {
+  height: 50px;
+  width: 50px;
   /* transform: rotate(90deg); */
   display: inline-block;
   /* margin: auto; */
@@ -138,6 +145,11 @@ Form > input {
 .West {
   position: relative;
   bottom: 0;
+}
+
+.coordinates {
+  display: inline-block;
+  min-height: 45px;
 }
 
 @media (max-width: 400) {
