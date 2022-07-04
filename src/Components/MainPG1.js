@@ -32,8 +32,8 @@ const MainPG1 = () => {
   }
 
   var today = new Date();
-  // var curHr = today.getHours();
-  var curHr = 18;
+  var curHr = today.getHours();
+  // var curHr = 18;
   var sunlightDir = "";
   // console.log(curHr);
 
@@ -45,7 +45,7 @@ const MainPG1 = () => {
 
   let x, y;
   let shadowLength;
-  // angle = 270;
+  // angle = 250;
   let angleRad = (angle * 3.14) / 180;
 
   useEffect(() => {
@@ -145,7 +145,7 @@ const MainPG1 = () => {
       shadowLength = 0;
     }
 
-    if (curHr <= 12) {
+    if (curHr > 6 && curHr <= 12) {
       if (angle >= 0 && angle <= 90) {
         x = -shadowLength * Math.sin(angleRad);
         y = shadowLength * Math.cos(angleRad);
@@ -153,14 +153,13 @@ const MainPG1 = () => {
         x = -shadowLength * Math.cos(angleRad - Math.PI / 2);
         y = -shadowLength * Math.sin(angleRad - Math.PI / 2);
       } else if (angle > 180 && angle < 270) {
-        x = shadowLength * Math.cos(angleRad - Math.PI);
+        x = shadowLength * Math.sin(angleRad - Math.PI);
         y = -shadowLength * Math.cos(angleRad - Math.PI);
       } else if (angle >= 270 && angle < 360) {
         x = shadowLength * Math.cos(angleRad - Math.PI * 1.5);
         y = shadowLength * Math.sin(angleRad - Math.PI * 1.5);
       }
-    }
-    if (curHr > 12) {
+    } else if (curHr > 12 && curHr < 19) {
       if (angle >= 0 && angle <= 90) {
         x = +shadowLength * Math.sin(angleRad);
         y = -shadowLength * Math.cos(angleRad);
@@ -168,19 +167,22 @@ const MainPG1 = () => {
         x = shadowLength * Math.cos(angleRad - Math.PI / 2);
         y = shadowLength * Math.sin(angleRad - Math.PI / 2);
       } else if (angle > 180 && angle < 270) {
-        x = -shadowLength * Math.cos(angleRad - Math.PI);
+        x = -shadowLength * Math.sin(angleRad - Math.PI);
         y = +shadowLength * Math.cos(angleRad - Math.PI);
       } else if (angle >= 270 && angle < 360) {
         x = -shadowLength * Math.cos(angleRad - Math.PI * 1.5);
         y = -shadowLength * Math.sin(angleRad - Math.PI * 1.5);
       }
+    } else {
+      x = 0;
+      y = 0;
     }
     setAng(angle);
     setShadowX(x);
     setShadowY(y);
 
     // console.log("angle", angle, angleRad);
-    // console.log(`${shadowX}px ${shadowY}px 5px #F4AAB9`);
+    console.log(`${shadowX}px ${shadowY}px 5px #000`);
 
     // busShadowStyle = {
     //   boxShadow: `${shadowX}px ${shadowY}px 5px #F4AAB9`,
