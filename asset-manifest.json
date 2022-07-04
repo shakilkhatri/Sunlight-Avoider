@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Sunlight-Avoider/static/css/main.da4df372.css",
-    "main.js": "/Sunlight-Avoider/static/js/main.c8309b2e.js",
+    "main.js": "/Sunlight-Avoider/static/js/main.77475c0d.js",
     "static/media/mapImage.PNG": "/Sunlight-Avoider/static/media/mapImage.00cebc7acd238e5ae3b4.PNG",
     "static/media/road2.jpg": "/Sunlight-Avoider/static/media/road2.1fbc9c2977f0ed4184bb.jpg",
     "static/media/sun.jpg": "/Sunlight-Avoider/static/media/sun.7ff0005c6846185f8a1a.jpg",
     "index.html": "/Sunlight-Avoider/index.html",
     "main.da4df372.css.map": "/Sunlight-Avoider/static/css/main.da4df372.css.map",
-    "main.c8309b2e.js.map": "/Sunlight-Avoider/static/js/main.c8309b2e.js.map"
+    "main.77475c0d.js.map": "/Sunlight-Avoider/static/js/main.77475c0d.js.map"
   },
   "entrypoints": [
     "static/css/main.da4df372.css",
-    "static/js/main.c8309b2e.js"
+    "static/js/main.77475c0d.js"
   ]
 }
