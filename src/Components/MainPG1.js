@@ -231,6 +231,11 @@ const MainPG1 = () => {
           <span className="Bus" style={busShadowStyle}>
             Vehicle
           </span>
+          {/* <img
+            src={require("../Images/bus.png")}
+            alt="Your vehicle"
+            className="BusImg"
+          /> */}
 
           <span className="sunBox" style={sunStyle}>
             {/* <p className="East">W</p> */}

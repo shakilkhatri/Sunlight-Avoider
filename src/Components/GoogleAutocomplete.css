@@ -1,9 +1,10 @@
 .location-search-input {
-  height: 2rem;
+  height: 2.5rem;
   font-size: 1.2rem;
   border: 2px solid gray;
   border-radius: 20px;
   padding-left: 10px;
+  margin: 10px;
 }
 
 .autocomplete-dropdown-container {
@@ -26,5 +27,6 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  padding: 3px;
+  padding: 10px;
+  font-size: larger;
 }
