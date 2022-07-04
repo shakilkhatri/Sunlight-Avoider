@@ -198,6 +198,7 @@ const MainPG1 = () => {
           Use this web-application before chosing a seat on public transport to
           avoid sitting directly into sunlight !
         </p>
+        <p>NOTE: The path is assumed to be straight line.</p>
       </div>
       <div className="MainPG1">
         <form className="Form" onSubmit={handleSubmit}>
