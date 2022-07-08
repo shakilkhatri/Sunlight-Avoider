@@ -115,6 +115,7 @@ Form > input {
   border-radius: 25px;
   z-index: 5;
   border: 1px solid yellow;
+  transition: 1s;
 }
 
 .sunBox {
@@ -128,6 +129,7 @@ Form > input {
   top: 0;
   /* border: 1px solid black; */
   height: 100%;
+  transition: 1s;
   background: linear-gradient(
     to right,
     transparent 0%,

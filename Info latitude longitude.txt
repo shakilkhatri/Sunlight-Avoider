@@ -1,0 +1,22 @@
+North pole
+latitude = 90
+longitude = no meaning
+
+Equator
+Latitude = 0
+
+South pole
+latitude = -90
+longitude = no meaning
+
+
+coordinates=(latitude,longitude)
+
+{"lat":43.2630126,"lng":-2.9349852}
+
+
+destination-origin
+
+
+
+

@@ -182,8 +182,10 @@ const MainPG1 = () => {
       y = 0;
     }
     setAng(angle);
-    setShadowX(x);
-    setShadowY(y);
+    setTimeout(() => {
+      setShadowX(x);
+      setShadowY(y);
+    }, 1000);
 
     // console.log("angle", angle, angleRad);
     console.log(`${shadowX}px ${shadowY}px 5px #000`);
