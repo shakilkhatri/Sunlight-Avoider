@@ -32,6 +32,7 @@ const Sun = ({ azimuth, elevation }) => {
     if (groupRef.current) {
         groupRef.current.position.set(x, y, z);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useFrame((state, delta) => {
