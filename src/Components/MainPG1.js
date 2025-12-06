@@ -6,6 +6,10 @@ import "./MainPG1.css";
 const MainPG1 = () => {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
+  const [selectedTime, setSelectedTime] = useState(() => {
+    const now = new Date();
+    return `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+  });
   const [sunData, setSunData] = useState({ azimuth: 180, elevation: 45, pathAngle: 0 });
 
 
@@ -50,10 +54,9 @@ const MainPG1 = () => {
       angle = 360 + arctan;
     }
 
-    // Current Time
-    const today = new Date();
-    const curHr = today.getHours();
-    // const curHr = 15; // Mock
+    // Current Time (Selected)
+    const [h, m] = selectedTime.split(":").map(Number);
+    const curHr = h + m / 60;
 
     // Elevation (Simple Model)
     // 6am=0, 12pm=90, 6pm=0
@@ -100,15 +103,20 @@ const MainPG1 = () => {
                     setDestination={setDestination}
                     key={"Destination"}
                 />
+                <input
+                    type="time"
+                    value={selectedTime}
+                    onChange={(e) => setSelectedTime(e.target.value)}
+                />
                 <button type="submit" className="button">
                     DETECT SUNLIGHT
                 </button>
             </form>
             <div className="info-panel">
-                <div className="data-row">
+                {/* <div className="data-row">
                     <span>Time:</span>
-                    <span>{new Date().getHours()}:00</span>
-                </div>
+                    <span>{selectedTime}</span>
+                </div> */}
                 <div className="data-row">
                     <span>Sun Angle:</span>
                     <span>{Math.round(sunData.azimuth)}°</span>
@@ -119,7 +127,7 @@ const MainPG1 = () => {
                 </div>
                 <div className="data-row">
                     <span>Shadow Direction:</span>
-                    <span>{sceneAzimuth % 360}° (Rel)</span>
+                    <span>{(sceneAzimuth % 360).toFixed(2)}° (Rel)</span>
                 </div>
             </div>
         </div>
@@ -128,6 +136,8 @@ const MainPG1 = () => {
             <SunlightScene 
                 sunAzimuth={sceneAzimuth} 
                 sunElevation={sunData.elevation} 
+                originName={origin ? JSON.parse(origin).name.split(',')[0] : "Origin"}
+                destinationName={destination ? JSON.parse(destination).name.split(',')[0] : "Destination"}
             />
             <div className="scene-overlay">
                 <p>3D Previz</p>

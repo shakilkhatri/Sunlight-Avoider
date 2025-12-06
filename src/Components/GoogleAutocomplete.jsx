@@ -25,9 +25,13 @@ class LocationSearchInput extends React.Component {
       .then((latLng) => {
         console.log("Coordinates:", latLng);
         if (this.props.placeholder === "Origin")
-          this.props.setOrigin(JSON.stringify(latLng));
+          this.props.setOrigin(
+            JSON.stringify({ ...latLng, name: this.state.address })
+          );
         else {
-          this.props.setDestination(JSON.stringify(latLng));
+          this.props.setDestination(
+            JSON.stringify({ ...latLng, name: this.state.address })
+          );
         }
       })
       .catch((error) => {

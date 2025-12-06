@@ -40,10 +40,24 @@ Sunlight Avoider is a modern web application designed to help public transport c
 
 ## 📸 How it Works
 
-1.  **Enter Origin & Destination**: Input your starting point and destination.
-2.  **Detect**: Click "DETECT SUNLIGHT".
-3.  **Visualize**: The app calculates the bearing of your route and the current sun position.
-4.  **Result**: Watch the 3D bus model to see which side is lit and where the shadows fall.
+### 1. Route Calculation 🗺️
+The app determines the geographic coordinates (Latitude/Longitude) of your **Origin** and **Destination**.
+- It calculates the linear path bearing (heading) between these two points.
+- This tells us which direction the bus is effectively facing (e.g., traveling North-East means a bearing of ~45°).
+
+### 2. Time & Sun Position ⏰
+Users can select a specific time for their trip (defaults to current device time).
+- **Elevation**: Establishes how high the sun is. It assumes a simplified model where the sun rises at 6 AM (0°), peaks at 12 PM (90°), and sets at 6 PM (0°).
+- **Azimuth**: Determines the sun's compass direction. approximated as East (90°) at 6 AM, South (180°) at 12 PM, and West (270°) at 6 PM.
+
+### 3. The "Relative Logic" Engine 🧮
+This is the core magic. In the 3D scene, the bus is always stationary, facing "forward" (0°). To simulate reality, we rotate the *Sun* around the bus.
+- Formula: `SceneAzimuth = (RealSunAzimuth - BusRouteBearing) + 180`
+- If you are driving North (0°) and the Sun is East (90°), the Sun hits you from the Right.
+- If you turn East (90°) and the Sun is still East (90°), the Sun is now directly in front of you.
+
+### 4. 3D Visualization 🚍
+The computed `SceneAzimuth` controls the position of a directional light source in the React Three Fiber scene, casting accurate dynamic shadows on the bus model to show you exactly which seats will be in the shade.
 
 ---
 

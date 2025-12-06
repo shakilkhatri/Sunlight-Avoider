@@ -4,8 +4,8 @@
 .search-box-container {
   position: relative;
   width: 100%;
-  max-width: 400px; /* Limit width for cleaner look */
-  margin: 0 auto;   /* Center it if needed, or stick to left/right via parent */
+  /* max-width removed to allow full width alignment */
+  /* margin removed */
   font-family: 'Inter', 'Roboto', sans-serif;
   z-index: 10;
 }
