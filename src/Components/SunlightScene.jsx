@@ -257,15 +257,31 @@ const Road = ({ originName, destinationName }) => {
   );
 };
 
+const CameraLogger = () => {
+  useFrame(({ camera }) => {
+    const pos = camera.position;
+    // Throttle logging to avoid console spam - only log when position changes significantly
+    if (!CameraLogger.lastPos || 
+        Math.abs(pos.x - CameraLogger.lastPos.x) > 0.1 ||
+        Math.abs(pos.y - CameraLogger.lastPos.y) > 0.1 ||
+        Math.abs(pos.z - CameraLogger.lastPos.z) > 0.1) {
+      console.log(`Camera Position: [${pos.x.toFixed(2)}, ${pos.y.toFixed(2)}, ${pos.z.toFixed(2)}]`);
+      CameraLogger.lastPos = { x: pos.x, y: pos.y, z: pos.z };
+    }
+  });
+  return null;
+};
+
 const SunlightScene = ({ sunAzimuth, sunElevation, originName, destinationName }) => {
   return (
     <div style={{ width: "100%", height: "500px", borderRadius: "20px", overflow: "hidden", background: "linear-gradient(to top, #87CEEB, #E0F7FA)" }}>
-      <Canvas shadows camera={{ position: [20, 10, 20], fov: 50 }}> {/* Adjusted camera to see road better */}
+      <Canvas shadows camera={{ position: [-6.39, 4.73, -31.01], fov: 50 }}> {/* Adjusted camera to see road better */}
         <ambientLight intensity={0.3} />
         <Sun azimuth={sunAzimuth} elevation={sunElevation} />
         <Vehicle />
         <Road originName={originName} destinationName={destinationName} />
         <OrbitControls enableZoom={true} minDistance={10} maxDistance={100} maxPolarAngle={Math.PI / 2 - 0.05} />
+        {/* <CameraLogger /> */}
       </Canvas>
     </div>
   );

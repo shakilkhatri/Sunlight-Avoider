@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import LocationSearchInput from "./GoogleAutocomplete";
 import SunlightScene from "./SunlightScene";
 import "./MainPG1.css";
 
 const MainPG1 = () => {
+  const sceneRef = useRef(null);
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [selectedTime, setSelectedTime] = useState(() => {
@@ -76,7 +77,17 @@ const MainPG1 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    calculateSunData();
+    
+    // Mobile Check & Scroll
+    if (window.innerWidth <= 768 && sceneRef.current) {
+        sceneRef.current.scrollIntoView({ behavior: 'smooth' });
+        // Delay transition to allow scroll to complete (approx)
+        setTimeout(() => {
+            calculateSunData();
+        }, 1200); 
+    } else {
+        calculateSunData();
+    }
   };
 
   // Adjust Sun Azimuth relative to Bus (Fixed at 0 local)
@@ -132,7 +143,7 @@ const MainPG1 = () => {
             </div>
         </div>
 
-        <div className="scene-panel">
+        <div className="scene-panel" ref={sceneRef}>
             <SunlightScene 
                 sunAzimuth={sceneAzimuth} 
                 sunElevation={sunData.elevation} 
