@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useLayoutEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, RoundedBox } from "@react-three/drei";
+import { Vector3 } from "three";
 
 const Sun = ({ azimuth, elevation }) => {
   const lightRef = useRef();
+  const groupRef = useRef();
   
   // Convert degrees to radians
   const azimuthRad = (azimuth * Math.PI) / 180;
@@ -15,10 +17,34 @@ const Sun = ({ azimuth, elevation }) => {
   const x = radius * Math.cos(elevationRad) * Math.sin(azimuthRad);
   const z = radius * Math.cos(elevationRad) * Math.cos(azimuthRad);
 
-  useFrame(() => {
+  const targetPos = useRef(new Vector3(x, y, z));
+
+  useEffect(() => {
+    targetPos.current.set(x, y, z);
+  }, [x, y, z]);
+
+  // Initial placement to avoid flying in from (0,0,0) on mount
+  useLayoutEffect(() => {
     if (lightRef.current) {
-      lightRef.current.position.set(x, y, z);
+        lightRef.current.position.set(x, y, z);
+        lightRef.current.lookAt(0, 0, 0);
+    }
+    if (groupRef.current) {
+        groupRef.current.position.set(x, y, z);
+    }
+  }, []);
+
+  useFrame((state, delta) => {
+    // Smooth transition speed
+    const easing = delta * 4; 
+
+    if (lightRef.current) {
+      lightRef.current.position.lerp(targetPos.current, easing);
       lightRef.current.lookAt(0, 0, 0);
+    }
+    
+    if (groupRef.current) {
+        groupRef.current.position.lerp(targetPos.current, easing);
     }
   });
 
@@ -40,7 +66,7 @@ const Sun = ({ azimuth, elevation }) => {
       />
       
       {/* Visual representation of Sun */}
-      <group position={[x, y, z]}>
+      <group ref={groupRef}>
         {/* Sun Sphere */}
         <mesh>
           <sphereGeometry args={[1.5, 32, 32]} />

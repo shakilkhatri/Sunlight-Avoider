@@ -7,6 +7,11 @@
   max-width: 400px; /* Limit width for cleaner look */
   margin: 0 auto;   /* Center it if needed, or stick to left/right via parent */
   font-family: 'Inter', 'Roboto', sans-serif;
+  z-index: 10;
+}
+
+.search-box-container:focus-within {
+  z-index: 1001;
 }
 
 /* Input Styles */
@@ -44,12 +49,12 @@
   top: calc(100% + 8px); /* Slight gap below input */
   left: 0;
   right: 0;
-  background: rgba(30, 30, 40, 0.95);
+  background: rgb(30, 30, 40);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(16px);
   z-index: 1000;
+
   overflow: hidden;
   display: flex;
   flex-direction: column;
