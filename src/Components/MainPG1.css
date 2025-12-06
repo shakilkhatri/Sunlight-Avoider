@@ -1,161 +1,169 @@
-.MainPG1 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0 30px 30px 30px;
-  background-color: black;
-  min-height: calc(100vh - 265px);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #121212;
+  color: #fff;
 }
 
-.info {
-  color: white;
-  background-color: black;
-  padding: 10px;
-  text-align: center;
+.MainPG1 {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #1e1e2f, #000000);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
+
+.header-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(90deg, #ff8c00, #ff0080);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  color: #888;
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Desktop: Split 50/50 */
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: fit-content;
+}
+
 .Form {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 330px;
-  width: 350px;
+  gap: 20px;
 }
 
-Form > input {
-  height: 2rem;
-  border: 2px solid gray;
-  border-radius: 20px;
-  padding-left: 10px;
+/* Overriding Google Input styles if possible, or just wrapper */
+.Form input {
+  background: #222;
+  border: 1px solid #444;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
 }
 
-.Bus {
-  display: inline-block;
-  position: relative;
-  left: 28px;
-  top: 70px;
-  height: 100px;
-  width: 50px;
-  background-color: rgb(255, 21, 0);
-  border: 2px solid black;
-  box-shadow: 0 0 20px gray;
-  font-size: small;
-  text-align: center;
-  /* vertical-align: middle; */
-  /* padding-top: 40px; */
-  /* background-image: url("../Images/bus.png");
-  background-position: center;
-  background-size: cover;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background: transparent; */
-}
-
-.BusImg {
-  background: transparent;
-}
-
-.Map {
-  height: 300px;
-  width: 300px;
-  margin: 30px;
-  background-color: rgb(212, 255, 193);
-  border: 2px solid black;
-  box-shadow: 0 0 20px gray;
-  border-radius: 150px;
-  background-image: url("../Images/mapImage.PNG");
+.Form input:focus {
+  outline: none;
+  border-color: #ff8c00;
 }
 
 .button {
-  display: inline-block;
-  margin: 15px 0;
-  height: 75px;
-  width: 250px;
-  border-radius: 20px;
-  transition: 0.5s;
-  font-size: 25px;
-  font-weight: bold;
-  border: 2px solid black;
+  background: linear-gradient(90deg, #ff8c00, #ff0080);
   color: white;
-  position: relative;
-  background-color: rgb(25, 136, 241);
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
 }
 
 .button:active {
-  /* top: 0.1em; */
-  zoom: 0.9;
-}
-.button:hover {
-  background-color: rgb(45, 151, 250);
+  transform: translateY(0);
 }
 
-.busbox {
-  text-align: unset;
-  width: 300px;
-  height: 300px;
-  background-color: white;
-  border-radius: 150px;
-  box-shadow: 0 0 10px lightgray;
-  background-image: url("../Images/road2.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  margin: 30px 0;
-  /* border: solid 50px cyan;
+.info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+
+.data-row:last-child {
+  border-bottom: none;
+}
+
+.data-row span:first-child {
+  color: #aaa;
+}
+
+.data-row span:last-child {
+  font-weight: bold;
+  color: #fff;
+}
+
+.scene-panel {
   position: relative;
-  z-index: 20; */
+  min-height: 500px;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.sunImage {
-  height: 50px;
-  width: 50px;
-  position: relative;
-  /* top: 50px; */
-  border-radius: 25px;
-  z-index: 5;
-  border: 1px solid yellow;
-  transition: 1s;
+.scene-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  pointer-events: none;
 }
 
-.sunBox {
-  height: 50px;
-  width: 50px;
-  /* transform: rotate(90deg); */
-  display: inline-block;
-  /* margin: auto; */
-  position: relative;
-  right: 25px;
-  top: 0;
-  /* border: 1px solid black; */
-  height: 100%;
-  transition: 1s;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    transparent calc(50% - 0.2px),
-    rgb(255, 234, 1) calc(50% - 0.1px),
-    transparent calc(50% + 0.2px),
-    transparent 100%
-  );
-}
+/* Responsive */
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr; /* Stack vertically */
+  }
 
-.East {
-  position: relative;
-  top: 0;
-}
-.West {
-  position: relative;
-  bottom: 0;
-}
-
-.coordinates {
-  display: inline-block;
-  min-height: 45px;
-}
-
-@media (max-width: 400) {
-  .busbox {
-    margin-top: 20px;
+  .title {
+    font-size: 2rem;
   }
 }

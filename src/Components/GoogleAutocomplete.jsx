@@ -5,48 +5,43 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import "./GoogleAutocomplete.css";
 
-let selectedOrigin = "";
-let selectedDestination = "";
-
 class LocationSearchInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: "" };
+    this.state = { address: "", errorMessage: "" };
   }
 
   handleChange = (address) => {
-    this.showResult = false;
-    this.setState({ address });
-
-    if (this.props.placeholder === "Origin") {
-      selectedOrigin = address;
-    } else {
-      selectedDestination = address;
-    }
+    this.setState({ address, errorMessage: "" });
   };
 
   handleSelect = (address) => {
+    this.setState({ address });
     geocodeByAddress(address)
       .then((results) => {
-        if (this.props.placeholder === "Origin") {
-          selectedOrigin = results[0].formatted_address;
-        }
-        if (this.props.placeholder === "Destination") {
-          selectedDestination = results[0].formatted_address;
-        }
-
-        console.log(results[0].formatted_address);
+        console.log("Geocoded:", results[0].formatted_address);
         return getLatLng(results[0]);
       })
       .then((latLng) => {
-        console.log("Success", latLng);
+        console.log("Coordinates:", latLng);
         if (this.props.placeholder === "Origin")
           this.props.setOrigin(JSON.stringify(latLng));
         else {
           this.props.setDestination(JSON.stringify(latLng));
         }
       })
-      .catch((error) => console.error("Error", error));
+      .catch((error) => {
+        console.error("Geocoding Error", error);
+        this.setState({
+          errorMessage: "Address selection failed. Check API configuration.",
+        });
+      });
+  };
+
+  onError = (status, clearSuggestions) => {
+    console.error("Google Maps API Error:", status);
+    this.setState({ errorMessage: "Google Maps API Error: " + status });
+    clearSuggestions();
   };
 
   render() {
@@ -55,39 +50,39 @@ class LocationSearchInput extends React.Component {
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
+        onError={this.onError}
+        debounce={500}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
+          <div className="search-box-container">
             <input
               {...getInputProps({
                 placeholder: `Search ${this.props.placeholder}...`,
                 className: "location-search-input",
               })}
-              value={
-                this.props.placeholder === "Origin"
-                  ? selectedOrigin
-                  : selectedDestination
-              }
             />
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
+              {this.state.errorMessage && (
+                <div
+                  className="error-message"
+                  style={{ color: "red", padding: "5px" }}
+                >
+                  {this.state.errorMessage}
+                </div>
+              )}
               {suggestions.map((suggestion) => {
                 const className = suggestion.active
                   ? "suggestion-item--active"
                   : "suggestion-item";
-                // inline style for demonstration purpose
-                const style = suggestion.active
-                  ? { backgroundColor: "#909090", cursor: "pointer" }
-                  : { backgroundColor: "#ffffff", cursor: "pointer" };
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {
                       className,
-                      style,
                     })}
                     key={suggestion.description}
                   >
-                    <span key={suggestion.description}>
+                    <span className="suggestion-text">
                       {suggestion.description}
                     </span>
                   </div>
