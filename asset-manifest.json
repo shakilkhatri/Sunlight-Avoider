@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/Sunlight-Avoider/static/css/main.f3ea43b7.css",
-    "main.js": "/Sunlight-Avoider/static/js/main.cc254c4f.js",
+    "main.js": "/Sunlight-Avoider/static/js/main.1cfea4ae.js",
     "index.html": "/Sunlight-Avoider/index.html"
   },
   "entrypoints": [
     "static/css/main.f3ea43b7.css",
-    "static/js/main.cc254c4f.js"
+    "static/js/main.1cfea4ae.js"
   ]
 }
